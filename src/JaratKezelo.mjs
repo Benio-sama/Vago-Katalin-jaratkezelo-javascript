@@ -4,8 +4,8 @@ export default class JaratKezelo {
     }
 
     ujJarat(jaratszam, honnan, hova, indulas) {
-        if (this.jaratok.some(jarat => jarat.jaratSzam === jaratSzam)) {
-            throw new Error("A járatszámnak egyedinek kell lennie!");
+        if (this.jaratok.some(jarat => jarat.jaratszam === jaratszam)) {
+            throw new Error("A jaratszamnak egyedinek kell lennie!");
         }
         this.jaratok.push({
             jaratszam,
@@ -19,9 +19,9 @@ export default class JaratKezelo {
     keses(jaratszam, keses) {
         const jarat = this.jaratok.find(j => j.jaratszam === jaratszam);
         if (!jarat) {
-            throw new Error("Nem létező járat!");
+            throw new Error("nem letezo jarat!");
         }
-        if (jarat.keses < 0) {
+        if (jarat.keses + keses < 0) {
             throw new Error("NegativKesesException");
         }
         jarat.keses += keses;
@@ -30,7 +30,7 @@ export default class JaratKezelo {
     mikorIndul(jaratszam) {
         const jarat = this.jaratok.find(j => j.jaratszam === jaratszam);
         if (!jarat) {
-            throw new Error("Nem létező járat!");
+            throw new Error("nem letezo jarat!");
         }
         const indulas = new Date(jarat.indulas);
         indulas.setMinutes(indulas.getMinutes() + jarat.keses);
@@ -39,8 +39,8 @@ export default class JaratKezelo {
 
     jaratokRepuloterrol(repter) {
         return this.jaratok
-            .filter(jarat => jarat.repterHonnan === repter)
-            .map(jarat => jarat.jaratSzam);
+            .filter(jarat => jarat.honnan === repter)
+            .map(jarat => jarat.jaratszam);
     }
 }
 
