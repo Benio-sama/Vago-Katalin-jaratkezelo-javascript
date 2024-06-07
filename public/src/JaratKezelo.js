@@ -28,23 +28,19 @@ class JaratKezelo {
     }
 
     mikorIndul(jaratszam) {
-        if (!this.jaratok.has(jaratszam)) {
+        const jarat = this.jaratok.find(j => j.jaratszam === jaratszam);
+        if (!jarat) {
             throw new Error("Nem létező járat!");
         }
-        const jarat = this.jaratok.get(jaratszam);
         const indulas = new Date(jarat.indulas);
         indulas.setMinutes(indulas.getMinutes() + jarat.keses);
         return indulas;
     }
 
     jaratokRepuloterrol(repter) {
-        const result = [];
-        for (const [jaratszam, jarat] of this.jaratok) {
-            if (jarat.honnan === repter) {
-                result.push(jaratszam);
-            }
-        }
-        return result;
+        return this.jaratok
+            .filter(jarat => jarat.repterHonnan === repter)
+            .map(jarat => jarat.jaratSzam);
     }
 }
 
