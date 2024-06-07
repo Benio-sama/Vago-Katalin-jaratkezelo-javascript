@@ -1,4 +1,4 @@
-class JaratKezelo {
+export default class JaratKezelo {
     constructor() {
         this.jaratok = [];
     }
@@ -44,4 +44,3 @@ class JaratKezelo {
     }
 }
 
-export default JaratKezelo;
